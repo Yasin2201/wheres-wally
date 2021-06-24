@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import firebase from './components/firebase'
+import Target from './components/Target'
 
 function App() {
 
-  const check = (e) => {
-    console.log(e.clientX)
-    console.log(e.clientY)
+  const [target, setTarget] = useState(false)
+  const [clientPos, setClientPos] = useState([undefined])
+
+  const check = () => {
     ref()
   }
 
@@ -14,11 +17,18 @@ function App() {
     })
   }
 
+  const displayDiv = (e) => {
+    setClientPos([e.clientX, e.clientY])
+    setTarget(true)
+  }
+
   return (
     <div id="container">
       <h1>Where's Wally</h1>
       <button onClick={check}>Get Characters</button>
-    </div>
+      <div id="pic" style={{ height: '80vh' }} onClick={displayDiv}></div>
+      {target && <Target clientPos={clientPos} />}
+    </div >
   );
 }
 
