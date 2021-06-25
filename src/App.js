@@ -5,7 +5,11 @@ import Target from './components/Target'
 function App() {
 
   const [target, setTarget] = useState(false)
+  const [viewImg, setViewImg] = useState(false)
+
   const [clientPos, setClientPos] = useState([undefined])
+  const [locURL, setLocURL] = useState('')
+  const storage = firebase.storage().ref()
 
   const check = () => {
     ref()
@@ -14,6 +18,10 @@ function App() {
   const ref = () => {
     firebase.firestore().collection('characters').get().then((snapshot) => {
       snapshot.docs.map((char) => console.log(char.data()))
+    })
+    storage.child('wheresWally-Easy.png').getDownloadURL().then((url) => {
+      setLocURL(url)
+      setViewImg(true)
     })
   }
 
@@ -25,8 +33,8 @@ function App() {
   return (
     <div id="container">
       <h1>Where's Wally</h1>
-      <button onClick={check}>Get Characters</button>
-      <div id="pic" style={{ height: '80vh' }} onClick={displayDiv}></div>
+      <button onClick={check}>Start</button>
+      {viewImg && <img src={locURL} alt="wally" width='100%' onClick={displayDiv} />}
       {target && <Target clientPos={clientPos} />}
     </div >
   );
