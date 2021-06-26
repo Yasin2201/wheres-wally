@@ -1,12 +1,18 @@
-const Target = ({ clientPos }) => {
+const Target = ({ clientPos, getChoice, characters }) => {
+    const positionTargetX = clientPos[0] + clientPos[2].left - 20
+    const positionTargetY = clientPos[1] + clientPos[2].top - 20
     return (
-        <div style={{ border: '2px  solid red', width: '50px', height: '50px', position: "fixed", top: `${clientPos[1] - 25}px`, left: `${clientPos[0] - 25}px` }}>
-            <div style={{ display: 'grid', position: "fixed", top: `${clientPos[1] + 32}px`, left: `${clientPos[0] - 25}px` }}>
-                <button>Wally</button>
-                <button>Wizard</button>
-                <button>Odlaw</button>
-            </div>
-        </div>
+        <div style={{ border: '2px  solid red', width: '40px', height: '40px', position: "fixed", top: `${positionTargetY}px`, left: `${positionTargetX}px` }}>
+            <div style={{ display: 'grid', position: "fixed", top: `${positionTargetY + 43}px`, left: `${positionTargetX - 10}px` }}>
+                {characters.map((char) => {
+                    return (
+                        <div key={char.name}>
+                            <button onClick={getChoice}>{char.name}</button>
+                        </div>
+                    )
+                })}
+            </div >
+        </div >
     )
 }
 
