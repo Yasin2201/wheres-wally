@@ -57,7 +57,12 @@ function App() {
   }
 
   const getChoice = (e) => {
-
+    const choice = characters.find((char) => char.name === e.target.textContent)
+    if (clientPos[0] > choice.posX - 20 && clientPos[0] < choice.posX + 20 && clientPos[1] > choice.posY - 20 && clientPos[1] < choice.posY + 20) {
+      console.log('yay')
+    } else {
+      console.log('nah')
+    }
   }
 
   return (
