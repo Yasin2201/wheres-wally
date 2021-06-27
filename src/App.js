@@ -15,6 +15,7 @@ function App() {
   const [time, setTime] = useState(0)
   const [snackbar, setSnackbar] = useState(false)
   const [checkChoice, setCheckChoice] = useState(undefined)
+  const [playerName, setPlayerName] = useState('')
 
   useEffect(() => {
     const db = firebase.firestore()
@@ -68,20 +69,18 @@ function App() {
     const choice = characters.find((char) => char.name === e.target.textContent)
 
     if (clientPos[0] > choice.posX - 20 && clientPos[0] < choice.posX + 20 && clientPos[1] > choice.posY - 20 && clientPos[1] < choice.posY + 20) {
-      console.log('yay')
       const newCharactersArr = characters.filter((char) => char !== choice)
       setCharacters(newCharactersArr)
       setTarget(false)
       popSnackBar(`You Found ${choice.name}!`)
     } else {
-      console.log('nah')
       setTarget(false)
       popSnackBar('Wrong! Try Again')
     }
   }
 
   const runTimer = () => {
-    setTime(time + 1)
+    // setTime(time + 1)
   }
 
   const popSnackBar = (choice) => {
@@ -92,6 +91,22 @@ function App() {
     }, 1500)
   }
 
+  const updateLeaderboard = () => {
+    firebase.firestore().collection('leaderboard').add({
+      player: playerName,
+      time: time
+    })
+  }
+
+  const submitToLeaderboard = () => {
+    updateLeaderboard()
+    console.log(playerName)
+  }
+
+  const getPlayerName = (e) => {
+    setPlayerName(e.target.value)
+  }
+
   return (
     <div id="container">
       <div>
@@ -99,7 +114,7 @@ function App() {
         {viewImg && <Timer gameOver={gameOver} runTimer={runTimer} time={time} />}
       </div>
       <div>
-        {gameOver && <SubmitScore />}
+        {gameOver && <SubmitScore submitToLeaderboard={submitToLeaderboard} getPlayerName={getPlayerName} />}
         {snackbar && <h1>{checkChoice}</h1>}
         {viewImg && <img src={locURL} alt="wally" width='1400px' onClick={displayDiv} />}
         {target && <Target clientPos={clientPos} getChoice={getChoice} characters={characters} />}

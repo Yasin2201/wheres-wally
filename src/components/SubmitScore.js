@@ -1,8 +1,8 @@
-const SubmitScore = () => {
+const SubmitScore = ({ submitToLeaderboard, getPlayerName }) => {
     return (
         <div id="modal">
-            <input type='text' />
-            <button>Submit</button>
+            <input type='text' onChange={getPlayerName} />
+            <button onClick={submitToLeaderboard}>Submit</button>
         </div>
     )
 }
