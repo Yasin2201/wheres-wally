@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import firebase from './components/firebase'
 import Target from './components/Target'
 import Timer from './components/Timer'
@@ -9,46 +9,49 @@ function App() {
   const [viewImg, setViewImg] = useState(false)
   const [clientPos, setClientPos] = useState([undefined])
   const [locURL, setLocURL] = useState('')
-  const [characters, setCharacters] = useState([])
+  const [characters, setCharacters] = useState([0])
   const [gameOver, setGameOver] = useState(null)
 
-  const db = firebase.firestore()
-  const storage = firebase.storage()
 
-  const check = () => {
+  useEffect(() => {
+    const db = firebase.firestore()
+    const storage = firebase.storage()
+
+    const getChars = async () => {
+      try {
+        const characterInfoArr = []
+        const ref = db.collection('characters')
+        const data = await ref.get()
+        for (const doc of data.docs) {
+          characterInfoArr.push(doc.data())
+        }
+        setCharacters(characterInfoArr)
+      } catch (err) {
+        console.log(err.message)
+      }
+    }
+
+    const getImage = async () => {
+      try {
+        const ref = storage.ref().child('Easy.jpeg')
+        const data = await ref.getDownloadURL()
+        setLocURL(data)
+        setViewImg(true)
+      } catch (err) {
+        console.log(err.message)
+      }
+    }
     getChars()
     getImage()
-  }
+    setGameOver(false)
+  }, [])
 
-  // useEffect(() => {
-  //   getChars()
-  //   getImage()
-  // }, [])
 
-  const getChars = async () => {
-    try {
-      const characterInfoArr = []
-      const ref = db.collection('characters')
-      const data = await ref.get()
-      for (const doc of data.docs) {
-        characterInfoArr.push(doc.data())
-      }
-      setCharacters(characterInfoArr)
-    } catch (err) {
-      console.log(err.message)
+  useEffect(() => {
+    if (!gameOver) {
+      return characters.length === 0 ? setGameOver(true) : gameOver
     }
-  }
-
-  const getImage = async () => {
-    try {
-      const ref = storage.ref().child('Easy.jpeg')
-      const data = await ref.getDownloadURL()
-      setLocURL(data)
-      setViewImg(true)
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
+  }, [gameOver, characters.length])
 
   const displayDiv = (e) => {
     const rect = e.target.getBoundingClientRect() //Method to get the size and position of an element's bounding box, relative to the viewport.
@@ -65,8 +68,10 @@ function App() {
       console.log('yay')
       const newCharactersArr = characters.filter((char) => char !== choice)
       setCharacters(newCharactersArr)
+      setTarget(false)
     } else {
       console.log('nah')
+      setTarget(false)
     }
   }
 
@@ -74,10 +79,9 @@ function App() {
     <div id="container">
       <h1>Where's Wally</h1>
       {viewImg && <Timer gameOver={gameOver} />}
-      <button onClick={check}>Start</button>
       {viewImg && <img src={locURL} alt="wally" width='1400px' onClick={displayDiv} />}
       {target && <Target clientPos={clientPos} getChoice={getChoice} characters={characters} />}
-    </div >
+    </ div >
   );
 }
 

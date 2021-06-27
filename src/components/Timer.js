@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 
 const Timer = ({ gameOver }) => {
     const [time, setTime] = useState(0)
-
     useEffect(() => {
         if (!gameOver) {
             const interval = setInterval(() => {
@@ -16,7 +15,7 @@ const Timer = ({ gameOver }) => {
 
     return (
         <div>
-            <h1>Timer: {time}</h1>
+            <h1>Timer: {time}s</h1>
         </div>
     )
 }
