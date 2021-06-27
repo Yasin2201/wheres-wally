@@ -11,7 +11,9 @@ function App() {
   const [locURL, setLocURL] = useState('')
   const [characters, setCharacters] = useState([0])
   const [gameOver, setGameOver] = useState(null)
-
+  const [time, setTime] = useState(0)
+  const [snackbar, setSnackbar] = useState(false)
+  const [checkChoice, setCheckChoice] = useState(undefined)
 
   useEffect(() => {
     const db = firebase.firestore()
@@ -69,19 +71,38 @@ function App() {
       const newCharactersArr = characters.filter((char) => char !== choice)
       setCharacters(newCharactersArr)
       setTarget(false)
+      popSnackBar(`You Found ${choice.name}!`)
     } else {
       console.log('nah')
       setTarget(false)
+      popSnackBar('Wrong! Try Again')
     }
+  }
+
+  const runTimer = () => {
+    setTime(time + 1)
+  }
+
+  const popSnackBar = (choice) => {
+    setSnackbar(true)
+    setCheckChoice(choice)
+    setTimeout(() => {
+      setSnackbar(false)
+    }, 1500)
   }
 
   return (
     <div id="container">
-      <h1>Where's Wally</h1>
-      {viewImg && <Timer gameOver={gameOver} />}
-      {viewImg && <img src={locURL} alt="wally" width='1400px' onClick={displayDiv} />}
-      {target && <Target clientPos={clientPos} getChoice={getChoice} characters={characters} />}
-    </ div >
+      <div>
+        <h1>Where's Wally</h1>
+        {viewImg && <Timer gameOver={gameOver} runTimer={runTimer} time={time} />}
+      </div>
+      <div>
+        {snackbar && <h1>{checkChoice}</h1>}
+        {viewImg && <img src={locURL} alt="wally" width='1400px' onClick={displayDiv} />}
+        {target && <Target clientPos={clientPos} getChoice={getChoice} characters={characters} />}
+      </div>
+    </div>
   );
 }
 
