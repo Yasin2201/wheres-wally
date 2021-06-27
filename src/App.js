@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import firebase from './components/firebase'
 import Target from './components/Target'
 import Timer from './components/Timer'
+import SubmitScore from './components/SubmitScore'
 
 function App() {
 
@@ -98,6 +99,7 @@ function App() {
         {viewImg && <Timer gameOver={gameOver} runTimer={runTimer} time={time} />}
       </div>
       <div>
+        {gameOver && <SubmitScore />}
         {snackbar && <h1>{checkChoice}</h1>}
         {viewImg && <img src={locURL} alt="wally" width='1400px' onClick={displayDiv} />}
         {target && <Target clientPos={clientPos} getChoice={getChoice} characters={characters} />}
