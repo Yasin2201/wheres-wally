@@ -11,7 +11,7 @@ const Routes = () => {
             <BrowserRouter>
                 <Navbar />
                 <Switch>
-                    <Route exact path="/" >
+                    <Route exact path="/wheres-wally" >
                         <App />
                     </Route>
                     <Route exact path="/leaderboard">
