@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+const Timer = ({ gameOver, runTimer, time }) => {
 
-const Timer = ({ gameOver }) => {
-    const [time, setTime] = useState(0)
     useEffect(() => {
         if (!gameOver) {
             const interval = setInterval(() => {
-                setTime(time + 1)
+                runTimer()
             }, 1000)
             return () => {
                 clearInterval(interval);
@@ -14,9 +13,7 @@ const Timer = ({ gameOver }) => {
     })
 
     return (
-        <div>
-            <h1>Timer: {time}s</h1>
-        </div>
+        <h1 id="timer">{time} secs</h1>
     )
 }
 

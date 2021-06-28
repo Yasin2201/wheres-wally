@@ -3,6 +3,7 @@ import firebase from './components/firebase'
 import Target from './components/Target'
 import Timer from './components/Timer'
 import SubmitScore from './components/SubmitScore'
+import '../src/styles/App.css'
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
   const [time, setTime] = useState(0)
   const [snackbar, setSnackbar] = useState(false)
   const [checkChoice, setCheckChoice] = useState(undefined)
-  const [playerName, setPlayerName] = useState('')
+  const [playerName, setPlayerName] = useState('Anon')
 
   useEffect(() => {
     const db = firebase.firestore()
@@ -100,25 +101,22 @@ function App() {
 
   const submitToLeaderboard = () => {
     updateLeaderboard()
-    console.log(playerName)
   }
 
   const getPlayerName = (e) => {
-    setPlayerName(e.target.value)
+    e.target.value === "" ? setPlayerName('Anon') : setPlayerName(e.target.value)
   }
 
   return (
     <div id="container">
-      <div>
-        <h1>Where's Wally</h1>
-        {viewImg && <Timer gameOver={gameOver} runTimer={runTimer} time={time} />}
-      </div>
-      <div>
-        {gameOver && <SubmitScore submitToLeaderboard={submitToLeaderboard} getPlayerName={getPlayerName} />}
-        {snackbar && <h1>{checkChoice}</h1>}
+      {/* {gameOver && <SubmitScore submitToLeaderboard={submitToLeaderboard} getPlayerName={getPlayerName} time={time} />} */}
+      <SubmitScore submitToLeaderboard={submitToLeaderboard} getPlayerName={getPlayerName} time={time} />
+      <div id="gameScreen">
+        {snackbar && <h3 id="checkChoice">{checkChoice}</h3>}
         {viewImg && <img src={locURL} alt="wally" width='1400px' onClick={displayDiv} />}
         {target && <Target clientPos={clientPos} getChoice={getChoice} characters={characters} />}
       </div>
+      {viewImg && <Timer gameOver={gameOver} runTimer={runTimer} time={time} />}
     </div>
   );
 }
