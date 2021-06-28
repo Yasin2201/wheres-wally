@@ -1,0 +1,47 @@
+#container {
+    height: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#gameScreen {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(247, 244, 244);
+}
+
+#checkChoice {
+    font-size: 1.2rem;
+    position: fixed;
+    top: 0;
+    padding: 5px;
+    box-shadow: 1px 1px 7px black;
+    background-color: cornflowerblue;
+    color: whitesmoke;
+}
+
+#modal {
+    position: fixed;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    height: inherit;
+    background-color: rgba(0, 0, 0, 0.219);
+}
+
+#submitBox {
+    background-color: cornflowerblue;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px black;
+}
+
+#timer {
+    font-size: 1rem;
+    margin: 0;
+    padding-left: 10px;
+    position: sticky;
+    bottom: 0;
+    background-color: cornflowerblue;
+}
