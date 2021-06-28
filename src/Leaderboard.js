@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import firebase from './components/firebase'
+import uniqid from 'uniqid'
 
 const Leaderboard = () => {
     const [currentLeaderboard, setCurrLeaderboard] = useState([])
@@ -24,12 +25,16 @@ const Leaderboard = () => {
     }, [])
 
     return (
-        <div>
+        <div id="leaderboard">
+            <h2 style={{ margin: '0' }}>Leaderboard</h2>
+            <hr />
             {currentLeaderboard.length > 0
                 ? currentLeaderboard.map((player) => {
                     return (
-                        <div key={player.player + player.time}>
-                            Player: {player.player} : Time: {player.time}
+                        <div key={uniqid()}>
+                            <h3>{player.player}</h3>
+                            <h3>{player.time} secs</h3>
+                            <hr />
                         </div>
                     )
                 })
