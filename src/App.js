@@ -101,9 +101,6 @@ function App() {
 
   const submitToLeaderboard = () => {
     updateLeaderboard()
-    setTimeout(() => {
-      window.location = `${window.location.origin}/Leaderboard`
-    }, 100);
   }
 
   const getPlayerName = (e) => {
