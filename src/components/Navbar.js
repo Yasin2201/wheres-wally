@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <div id='navbar'>
             <h1 id="title">Where's Wally & Friends</h1>
-            <h2 onClick={setPath}>{currPath === '/wheres-wally' ? <Link id="links" to="/Leaderboard">Leaderboard</Link> : <Link id="links" to="/wheres-wally">Play</Link>}</h2>
+            <h2 onClick={setPath}>{currPath === '/wheres-wally' || currPath === '/wheres-wally/' ? <Link id="links" to="/Leaderboard">Leaderboard</Link> : <Link id="links" to="/wheres-wally">Play</Link>}</h2>
         </div>
     )
 }
