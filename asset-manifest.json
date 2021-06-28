@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/wheres-wally/static/css/main.d68e194d.chunk.css",
-    "main.js": "/wheres-wally/static/js/main.43a63a2f.chunk.js",
-    "main.js.map": "/wheres-wally/static/js/main.43a63a2f.chunk.js.map",
+    "main.js": "/wheres-wally/static/js/main.b3f525b1.chunk.js",
+    "main.js.map": "/wheres-wally/static/js/main.b3f525b1.chunk.js.map",
     "runtime-main.js": "/wheres-wally/static/js/runtime-main.e4fce102.js",
     "runtime-main.js.map": "/wheres-wally/static/js/runtime-main.e4fce102.js.map",
     "static/js/2.61aa23fc.chunk.js": "/wheres-wally/static/js/2.61aa23fc.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.e4fce102.js",
     "static/js/2.61aa23fc.chunk.js",
     "static/css/main.d68e194d.chunk.css",
-    "static/js/main.43a63a2f.chunk.js"
+    "static/js/main.b3f525b1.chunk.js"
   ]
 }
