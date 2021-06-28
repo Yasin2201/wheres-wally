@@ -81,7 +81,7 @@ function App() {
   }
 
   const runTimer = () => {
-    // setTime(time + 1)
+    setTime(time + 1)
   }
 
   const popSnackBar = (choice) => {
@@ -101,6 +101,9 @@ function App() {
 
   const submitToLeaderboard = () => {
     updateLeaderboard()
+    setTimeout(() => {
+      window.location = `${window.location.href}leaderboard`
+    }, 100);
   }
 
   const getPlayerName = (e) => {
@@ -109,8 +112,7 @@ function App() {
 
   return (
     <div id="container">
-      {/* {gameOver && <SubmitScore submitToLeaderboard={submitToLeaderboard} getPlayerName={getPlayerName} time={time} />} */}
-      <SubmitScore submitToLeaderboard={submitToLeaderboard} getPlayerName={getPlayerName} time={time} />
+      {gameOver && <SubmitScore submitToLeaderboard={submitToLeaderboard} getPlayerName={getPlayerName} time={time} />}
       <div id="gameScreen">
         {snackbar && <h3 id="checkChoice">{checkChoice}</h3>}
         {viewImg && <img src={locURL} alt="wally" width='1400px' onClick={displayDiv} />}

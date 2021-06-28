@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 
 const Routes = () => {
     return (
-        <div id="mainDiv" style={{ width: '100%' }}>
+        <div id="mainDiv">
             <BrowserRouter>
                 <Navbar />
                 <Switch>
