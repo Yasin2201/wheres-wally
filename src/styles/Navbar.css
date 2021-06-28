@@ -1,0 +1,31 @@
+#navbar {
+    position: sticky;
+    top: 0;
+    background-color: rgb(247, 244, 244);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 70px;
+    grid-template-areas: 
+    "title link";
+    justify-items: center;
+    align-items: center;
+}
+
+#title {
+    grid-area: title;
+    font-size: 1.8em;
+    color: rgb(241, 83, 83);
+}
+
+#links {
+    grid-area: link;
+    font-size: 1.3em;
+    color: #436cf5;
+    text-decoration: none;
+}
+
+#links:hover {
+    color: #3659ca;
+}
+
