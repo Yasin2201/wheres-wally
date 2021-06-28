@@ -102,7 +102,7 @@ function App() {
   const submitToLeaderboard = () => {
     updateLeaderboard()
     setTimeout(() => {
-      window.location = `${window.location.href}leaderboard`
+      window.location = `${window.location.origin}/Leaderboard`
     }, 100);
   }
 
