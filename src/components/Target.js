@@ -9,7 +9,7 @@ const Target = ({ clientPos, getChoice, characters }) => {
                 {characters.map((char) => {
                     return (
                         <div key={char.name}>
-                            <button style={{ width: '100%' }} onClick={getChoice}>{char.name}</button>
+                            <button className='choice-button' onClick={getChoice}>{char.name}</button>
                         </div>
                     )
                 })}

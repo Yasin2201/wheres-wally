@@ -6,3 +6,22 @@
     height: 40px;
     position: fixed;
 }
+
+.choice-button {
+    margin: 1px;
+    width: 100%;
+    background-color: rgb(100, 185, 255);
+    border-radius: 5px;
+    border: solid 2px rgb(100, 185, 255);
+    outline: none;
+}
+
+.choice-button:hover {
+    background-color: rgb(149, 207, 255);
+    transition: 0.2s;
+}
+
+.choice-button:active {
+    background-color: rgb(230, 244, 255);
+    transition: 0.1s;
+}
